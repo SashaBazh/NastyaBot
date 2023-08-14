@@ -1,0 +1,240 @@
+import telebot
+from telebot import types
+import text
+bot = telebot.TeleBot('6109820425:AAH-yMur4m_EeHufvwl0OuZZzBy7hgwMHsE')
+global score
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    markup = types.InlineKeyboardMarkup()
+    btn1 = types.InlineKeyboardButton('Рассказать', callback_data='tell')
+    btn2 = types.InlineKeyboardButton('Меню', callback_data='menu')
+    btn3 = types.InlineKeyboardButton('Помощь психолога',callback_data='help')
+    tests = types.InlineKeyboardButton('Обо ине', callback_data='tests')
+    markup.row(btn1)
+    markup.row(btn2)
+    markup.row(btn3)
+    markup.row(tests)
+
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+    caption=f"Привет, {message.from_user.first_name}!\nЯ, помощник Анастасии, чат-бот по отношениям 🙌\n\nДавай я расскажу тебе чем мы будем тут заниматься?",
+    reply_markup=markup)
+
+
+@bot.message_handler()
+def none(message):
+    bot.send_message(message.chat.id, f'Сообщение не распознано - такой команды не существует 🤨')
+
+
+def tell(message):
+    markup = types.InlineKeyboardMarkup()
+    btn4 = types.InlineKeyboardButton('Познакомится', url=text.link)
+    btn5 = types.InlineKeyboardButton('Дальше', callback_data='next')
+    markup.row(btn4)
+    markup.row(btn5)
+
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+    caption=text.tell,
+    reply_markup=markup)
+
+def next(message):
+    markup = types.InlineKeyboardMarkup()
+    btn6 = types.InlineKeyboardButton('Давай', callback_data='go')
+    markup.row(btn6)
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+    caption=text.next, reply_markup=markup)
+
+def go(message):
+    markup = types.InlineKeyboardMarkup()
+    textt = types.InlineKeyboardButton('Давай', callback_data='goo')
+    markup.row(textt)
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+    caption=text.ok, reply_markup=markup)
+
+def goo(message):
+    markup = types.InlineKeyboardMarkup()
+    dawai1 = types.InlineKeyboardButton('Давай', callback_data='gooo')
+    markup.row(dawai1)
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+    caption=text.dawai1, reply_markup=markup)
+
+def gooo(message):
+    markup = types.InlineKeyboardMarkup()
+    dawai2 = types.InlineKeyboardButton('Давай', callback_data='goooo')
+    markup.row(dawai2)
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+    caption=text.dawai2, reply_markup=markup)
+
+def goooo(message):
+    markup = types.InlineKeyboardMarkup()
+    btnzap = types.InlineKeyboardButton('Запись на консультацию', callback_data='zap')
+    btnex = types.InlineKeyboardButton('Выход в меню', callback_data='menu')
+    markup.row(btnzap)
+    markup.row(btnex)
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+    caption=text.dawai3, reply_markup=markup)
+def menu(message):
+    markup = types.InlineKeyboardMarkup()
+    btn7 = types.InlineKeyboardButton('Отншения', callback_data="otnoshenia")
+    btn8 = types.InlineKeyboardButton('Упражения и техники', url='https://www.instagram.com/kurilenko.psy/')
+    btn9 = types.InlineKeyboardButton('Психологические тесты', url='https://www.instagram.com/kurilenko.psy/')
+    btn10 = types.InlineKeyboardButton('Полезные видео', url='https://www.instagram.com/kurilenko.psy/')
+    btn11 = types.InlineKeyboardButton('Полезные книги', url='https://www.instagram.com/kurilenko.psy/')
+    markup.row(btn7)
+    markup.row(btn8)
+    markup.row(btn9)
+    markup.row(btn10)
+    markup.row(btn11)
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+                   caption=text.menu,
+                   reply_markup=markup)
+
+@bot.callback_query_handler(func=lambda callback: True)
+def callback_message(callback):
+    if callback.data == 'tell':
+        tell(callback.message)
+    elif callback.data == 'next':
+        next(callback.message)
+    elif callback.data == 'menu':
+        menu(callback.message)
+    elif callback.data == 'help':
+        help(callback.message)
+    elif callback.data == 'tests':
+        tests(callback.message)
+    elif callback.data == 'test1':
+        test1(callback.message)
+    elif callback.data == 'score':
+        score(callback.message)
+    elif callback.data == 'go':
+        go(callback.message)
+    elif callback.data == 'goo':
+        goo(callback.message)
+    elif callback.data == 'gooo':
+        gooo(callback.message)
+    elif callback.data == 'goooo':
+        goooo(callback.message)
+    elif callback.data == 'zap':
+        zap(callback.message)
+    elif callback.data == 'otnoshenia':
+        otnoshenia(callback.message)
+    elif callback.data == 'otn1':
+        otn1(callback.message)
+    elif callback.data == 'stad':
+        stad(callback.message)
+    elif callback.data == 'why':
+        why(callback.message)
+    elif callback.data == 'why1':
+        why1(callback.message)
+    elif callback.data == 'exi':
+        exi(callback.message)
+
+
+def otnoshenia(message):
+    markup = types.InlineKeyboardMarkup()
+    otnoshenia = types.InlineKeyboardButton('Давай', callback_data="otn1")
+    markup.row(otnoshenia)
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+                   caption=text.otnoshenia, reply_markup=markup)
+
+def otn1(message):
+    markup = types.InlineKeyboardMarkup()
+    otn1 = types.InlineKeyboardButton('Далее', callback_data="stad")
+    markup.row(otn1)
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+                   caption=text.stadii, reply_markup=markup)
+
+def stad(message):
+    markup = types.InlineKeyboardMarkup()
+    stad = types.InlineKeyboardButton('Далее', callback_data="why")
+    markup.row(stad)
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+                   caption=text.why, reply_markup=markup)
+
+def why(message):
+    markup = types.InlineKeyboardMarkup()
+    why = types.InlineKeyboardButton('Далее', callback_data="why1")
+    markup.row(why)
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+                   caption=text.why1, reply_markup=markup)
+
+def why1(message):
+    markup = types.InlineKeyboardMarkup()
+    exi = types.InlineKeyboardButton('Выйти из отношений', callback_data="exi")
+    save = types.InlineKeyboardButton('Сохранить отношения', callback_data="save")
+    markup.row(exi)
+    markup.row(save)
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+                   caption=text.why2, reply_markup=markup)
+
+
+def exi(message):
+    markup = types.InlineKeyboardMarkup()
+    exitt = types.InlineKeyboardButton('Связатся с психологом', callback_data="exi")
+    markup.row(exitt)
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+                   caption=text.exi, reply_markup=markup)
+def help(message):
+    file = open('./yes.jpg', 'rb')
+    bot.send_photo(message.chat.id, file,
+                   caption=f"Звони с 9.00 до 21.00\n+375336684769",)
+
+def tests(message):
+    markup = types.InlineKeyboardMarkup()
+    t_1 = types.InlineKeyboardButton('Тест на удовлетворенность отношениями', callback_data='test1')
+    t_2= types.InlineKeyboardButton('Тест№2', url='https://www.instagram.com/kurilenko.psy/')
+    t_3= types.InlineKeyboardButton('Тест№3', url='https://www.instagram.com/kurilenko.psy/')
+    markup.row(t_1)
+    markup.row(t_2)
+    markup.row(t_3)
+    bot.send_message(message.chat.id, "Выбери тест который хочешь пройти", reply_markup=markup)
+
+
+def test1(message):
+    markup = types.InlineKeyboardMarkup()
+    t0 = types.InlineKeyboardButton('очень недоволен', callback_data='score')
+    t1 = types.InlineKeyboardButton('умеренно недоволен', callback_data='score')
+    t2 = types.InlineKeyboardButton('немного недоволен', callback_data='score')
+    t3 = types.InlineKeyboardButton('нейтрален', callback_data='score')
+    t4 = types.InlineKeyboardButton('слегка доволен', callback_data='score')
+    t5 = types.InlineKeyboardButton('умеренно доволен', callback_data='score')
+    t6 = types.InlineKeyboardButton('очень доволен', callback_data='score')
+    ret = types.InlineKeyboardButton('начать тест заново', callback_data='score')
+    markup.row(t0, t1)
+    markup.row(t2, t3)
+    markup.row(t4, t5)
+    markup.row(t6)
+    markup.row(ret)
+    bot.send_message(message.chat.id, "Общение и открытость", reply_markup=markup)
+
+def score(message):
+    score = 0
+    if message.text == 'очень недоволен':
+        score +=0
+    if message.text == 'умеренно недоволен':
+        score +=1
+    if message.text == 'немного недоволен':
+        score +=2
+    if message.text == 'нейтрален':
+        score +=3
+    if message.text == 'слегка доволен':
+        score +=4
+    if message.text == 'умеренно доволен':
+        score +=5
+    if message.text == 'очень доволен':
+        score +=6
+
+bot.polling(none_stop=True)
